@@ -1,0 +1,116 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package musicplayer;
+
+/**
+ *
+ * @author li_873239
+ */
+import java.io.File;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaPlayer.Status;
+import javafx.util.Duration;
+import javafx.scene.media.MediaPlayer.Status;
+
+public class MusicPlayer {
+
+    /**
+     * @param args the command line arguments
+     */
+    private String musicName;
+    private String fileName;
+    private Media music;
+    private MediaPlayer player;
+
+    public MusicPlayer(String musicName, String fileName) {
+        final JFXPanel fxpanel = new JFXPanel();
+        this.musicName = musicName;
+        this.fileName = fileName;
+        music = new Media(new File(this.fileName).toURI().toString());
+        player = new MediaPlayer(music);
+        //player.setOnEndOfMedia(new Runnable() {
+
+         /*   @Override
+            public void run() 
+            {
+              
+            }
+        })        
+    }
+            */
+        }
+    public String getMusicName() {
+        return musicName;
+    }
+
+    public void setMusicName(String musicName) {
+        this.musicName = musicName;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+    
+    public void playMusic() 
+    {
+      
+        
+        player.play();
+    
+    }
+    public boolean endOfMusic()
+    {
+        if(player.currentTimeProperty().equals(player.getCycleDuration()))
+        {
+            return true;
+        }
+        return false;
+    }
+    public boolean isPlaying()
+    {
+        Status status = player.getStatus();
+        if (status == Status.PLAYING)
+        {
+            return true;
+        }
+        return false;
+    }
+    public long getDuration()
+    {
+        Duration time = player.getCycleDuration();
+        long result = (long)time.toMillis();
+        return result;
+    }
+    public void pause() 
+    {
+
+        player.pause();
+
+    }
+    public void resume()
+    {
+        player.play();
+    }
+    public boolean isPaused()
+    {
+        Status status = player.getStatus();
+        if (status == Status.PAUSED)
+        {
+            return true;
+        }
+        return false;
+    }
+    
+
+    public static void main(String[] args) {
+        // TODO code application logic here
+    }
+
+
+    
+}
